@@ -1,11 +1,13 @@
 import cors from "cors";
 import express from "express";
+import productRouter from "./routes/product.routes";
 import testRouter from "./routes/test.routes";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/products", productRouter);
 app.use("/test", testRouter);
 
 app.get("/health", (_, res) => {
