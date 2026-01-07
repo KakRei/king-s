@@ -10,10 +10,11 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2020",
-    "types": [],
     "outDir": "dist",
     "rootDir": "src",
+    "types": ["express"],
     "esModuleInterop": true,
+    "typeRoots": ["./src/types", "./node_modules/@types"],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
@@ -44,5 +45,6 @@
     "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "exclude": ["prisma.config.ts"]
+  "exclude": ["prisma.config.ts"],
+  "include": ["src"]
 }
