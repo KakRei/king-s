@@ -4,7 +4,11 @@ import { env } from "../config/env";
 import { userRepo } from "../repositories/user.repo";
 
 //--- Register a new user ---
-export const registerUser = async (email: string, password: string) => {
+export const registerUser = async (
+  email: string,
+  password: string,
+  role: "USER" | "ADMIN"
+) => {
   // Check if user already exists
   const existingUser = await userRepo.findByEmail(email);
 
@@ -16,7 +20,7 @@ export const registerUser = async (email: string, password: string) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   // Create user
-  return userRepo.create({ email, password: hashedPassword });
+  return userRepo.create({ email, password: hashedPassword, role });
 };
 
 //--- Login user ---
@@ -34,13 +38,21 @@ export const loginUser = async (email: string, password: string) => {
   }
 
   const token = jwt.sign(
-    { userId: user.id, email: user.email },
+    {
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+    },
     env.JWT_SECRET,
     { expiresIn: "7d" }
   );
 
   return {
     token,
-    user: { id: user.id, email: user.email },
+    user: {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    },
   };
 };

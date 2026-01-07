@@ -1,5 +1,6 @@
 import cors from "cors";
 import express from "express";
+import adminRoutes from "./routes/admin.routes";
 import authRoutes from "./routes/auth.routes";
 import productRouter from "./routes/product.routes";
 import testRouter from "./routes/test.routes";
@@ -13,6 +14,7 @@ app.use("/products", productRouter);
 app.use("/test", testRouter);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/admin", adminRoutes);
 
 app.get("/health", (_, res) => {
   res.json({ status: "ok" });

@@ -6,7 +6,7 @@ const router = Router();
 router.get("/user", authenticate, (req, res) => {
   return res.json({
     message: "Authenticated user",
-    user: req.user,
+    user: req.user?.role,
   });
 });
 

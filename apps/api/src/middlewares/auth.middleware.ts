@@ -5,6 +5,7 @@ import { env } from "../config/env";
 interface AuthJwtPayload extends JwtPayload {
   userId: string;
   email: string;
+  role: "USER" | "ADMIN";
 }
 
 export const authenticate = (
@@ -40,6 +41,7 @@ export const authenticate = (
     req.user = {
       id: payload.userId,
       email: payload.email,
+      role: payload.role,
     };
     next();
   } catch (err) {
